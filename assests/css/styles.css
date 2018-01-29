@@ -1,0 +1,117 @@
+
+form h1 {
+	color: white;
+}
+
+input[type="submit"] {
+	background: #179b77;
+	color: white;
+}
+
+/*Navbar*/
+
+
+nav ul li a:hover{
+	text-decoration: none;
+	border-radius: 5px;
+	text-shadow: 1px 1px 1px white, 3px 3px 5px lightblue;
+}
+
+/*Content Main page*/
+
+#myCarousel img{
+	max-height: 400px;
+	min-height: 200px;
+	height: 400px;
+	margin:auto;
+}
+
+.products {
+	margin: 10px 0;
+	padding: 5px;
+	padding: auto;
+}
+.products img {
+	max-height:180px;
+	margin: 0 auto;
+}
+.products:hover {
+	box-shadow: 1px 2px 1px 2px gray;
+	border-radius: 5px;
+}
+
+
+
+/*SIGN UP FORM*/
+
+input:hover {
+	border: 2px solid lightblue;
+}
+
+.sign-up form input, .sign-in form input{
+	margin-bottom: 10px;
+	height: 50px;
+}
+
+.sign-up form input[type="text"] {
+	float:left;
+	width: 50%;
+}
+.sign-up ,.sign-in, .success {
+	color: white;
+	border-radius: 5px;
+	box-shadow: 0 4px 10px 4px gray;
+	background: rgba(19, 35, 47, 0.9);
+	padding: 30px;
+}
+
+/*CONFIRM page*/
+
+@media only screen and (max-width: 800px ){
+
+	.confirm , .success, .error, .forgot, .reset{
+		color: white;
+		width:  80%;
+		margin: auto;
+		padding: 20px 0;
+		border-radius: 5px;
+		box-shadow: 0 4px 10px 4px gray;
+		background: rgba(19, 35, 47, 0.9);
+	}
+}
+
+.confirm , .success, .error, .forgot, .reset{
+	color: white;
+	width:  40%;
+	margin: auto;
+	padding: 20px 0;
+	border-radius: 5px;
+	box-shadow: 0 4px 10px 4px gray;
+	background: rgba(19, 35, 47, 0.9);
+}
+
+
+.message {
+	width: 100%;
+	height: 70px;
+	background: #ff3535;
+	margin-bottom: 10px;
+}
+
+/*PROMPT Buttons*/
+
+.err_btn, .frgt_btn {
+	margin-top: 10px;
+	width: 100px;
+}
+
+/*FORGOT page*/
+
+/*RESET Page*/
+
+.rst_btn {
+	width: 80px;
+}
+
+.reset input[type="password"] {
+}
