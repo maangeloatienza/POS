@@ -1,101 +1,55 @@
+<?php 
+session_start();
+require "extensions/db.php";
+?>
+
+<?php
+
+$sample = serialize($_SESSION['shopping_cart']);
+$un = unserialize($sample);
+
+foreach ($un as $key => $value) {
+	$total = ($value['quantity'] * $value['price']);
+
+	$total =+ $total + ($value['quantity'] * $value['price']);
+}
+
+if(isset($_SESSION['logged_in'])){
+
+$result = $con->prepare("INSERT INTO order_info(cust_id,order_details,total) VALUES(:cust_id,:order_details,:total)");
+
+$result->bindValue("cust_id",$_SESSION['id']);
+$result->bindValue(":order_details",$sample);
+$result->bindValue(":total",$total);
+
+
+if($result->execute()){
+	header("Location: checkout.php");
+}
 
 
 
-<div class=" col-md-3 col-sm-6 text-center" id="item">
-	<div class="modal fade" id="myModal" role="dialog">
-		<div class="modal-dialog modal-lg">
-	    
-		<div class="modal-content">
-			<div class="modal-header">
 
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
-			</div>
+}else{
 
-		<!--CONTENT OF THE CART-->
+	 	include "extensions/header.php";
+		//include 'extensions/nav.php';
+?>
 
-<div class="modal-body">
-	<div class="row">
-			<?php //if(isset($_SESSION['active'])): ?>
-			<div class="table-responsive col-lg-12 ">  
-				<table class="table text-left" id="cart">  
-					<tr><th colspan="5"><h3>Order Details</h3></th></tr>   
-				<tr > 
-					
-						<th width="40%">Product Name</th>  
-						<th width="10%">Quantity</th>
-						<th width="20%">Price</th>
-						<th width="15%">Total</th>
-						<th width="5%">Action</th>  
-				</tr>  
-		        
-				<?php   
-					if(!empty($_SESSION['shopping_cart'])):
-		             $total = 0;
-						foreach($_SESSION['shopping_cart'] as $key => $product): 
-		        ?>  
-				<tr>  
-					<td><?php echo $product['name']; ?></td>  
-					<td><?php echo $product['quantity']; ?></td>  
-					<td>&#8369; <?php echo $product['price']; ?></td>  
-					<td>&#8369; <?php echo number_format($product['quantity'] * $product['price'], 2); ?></td>  
-					<td>
-						<a href="index.php?action=delete&item_id=<?php echo $product['id']; ?>">
-							<i class="fa fa-trash"></i>
-						</a>
-					</td>  
-				</tr>
-				<?php  
-					$total = $total + ($product['quantity'] * $product['price']);  
-					endforeach;  
-				?>  
-				<tr>  
-					<td colspan="3" align="right">Total</td>  
-					<td align="right">PHP <?php echo number_format($total, 2); ?></td>  
-					<td></td>  
-		        </tr>
+	<div class="col-md-4 col-xs-10  col-md-offset-4 col-xs-offset-1 sign-in">
+		
+		<form method="POST" action="guess_login.php" class="form-group">
+			<h1 class="text-center">CHECKOUT INFORMATION</h1>
+			<input type="text" name="first_name" class="form-control" placeholder="First name" required autocomplete="off">
+			<input type="text" name="last_name" class="form-control" placeholder="Last name" required autocomplete="off">
+			<input type="text" name="address" class="form-control" placeholder="Address" required autocomplete="off">
+			<input type="number" name="contact" class="form-control" placeholder="Contact number" min-length="11" required autocomplete="off">
+			<input type="submit" name="send" value="Send" class="btn form-control">
 
-		        <tr>
-		            <!-- Show checkout button only if the shopping cart is not empty -->
-		            <td colspan="3">
-						<?php 
-							if (isset($_SESSION['shopping_cart'])):
-								if (count($_SESSION['shopping_cart']) > 0):
-							?>
-								<a href="clear_cart.php" class="button"><i class="fa fa-times" aria-hidden="true"></i>CLEAR CART</a>
-								
-							<?php 	
-								endif;
-							endif;
-						?>
-					</td>
-					<td colspan="2">
-						<?php 
-							if (isset($_SESSION['shopping_cart'])):
-								if (count($_SESSION['shopping_cart']) > 0):
-							?>
-								<a href="#" class="button">Checkout</a>
-							<?php 	
-								endif;
-							endif;
-						?>
-					</td>
-				</tr>
-			<?php  	//endif;
-					endif;
-				?>  
-			</table> 
-		</div>
-	</div>				
-</div>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-			</div>
-		</div>
-	      
-		</div>
+		</form>
 	</div>
-  
-</div>
 
-<?php include "extensions/footer.php" ?>
+<?php 
+}
+
+include "extensions/footer.php" ?>

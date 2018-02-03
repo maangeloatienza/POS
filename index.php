@@ -82,8 +82,8 @@ function pre_r($array){
 	
 		<!--Carousel of some products-->
 <div class="row">
-	<div class="col-lg-1 col-md-1 col-sm-1"></div>
-	<div class="col-lg-10 col-md-10 col-sm-10">
+	<div class=""></div>
+	<div class="col-lg-10 col-md-10 col-sm-10 col-lg-offset-1 col-md-offset-1 col-sm-offset-1">
 		<div id="myCarousel" class="carousel slide row" data-ride="carousel">
   				<!-- Indicators -->
 				<ol class="carousel-indicators">
@@ -109,7 +109,7 @@ function pre_r($array){
 
 		</div>
 	</div>
-	<div class="col-lg-1 col-md-1 col-sm-1"></div>
+<!--	<div class="col-lg-1 col-md-1 col-sm-1"></div>-->
 </div>
 		<!--Carousel of some products-->
 
@@ -139,7 +139,7 @@ function pre_r($array){
 						</a>
 						<h4 class="text-info text-center"><?php echo $result['item_name']; ?></h4>
 						<h5 class="text-info text-center"><?php echo " &#8369;".$result['price'] ?></h5>
-						<input type="number" name="quantity" value="Quantity" class="form-control text-center" value="1" placeholder="Quantity" min="0" required>
+						<input type="number" name="quantity" value="Quantity" class="form-control text-center" value="1" placeholder="Quantity" min="0" required autocomplete="off">
 						<input type="hidden" name="item_name" value="<?php echo $result['item_name']?>">
 						<input type="hidden" name="item_price" value="<?php echo $result['price']?>">
 						<input type="submit" name="add_to_cart" value="Add to cart" class="btn btn-primary btn-sm form-control" >
@@ -158,8 +158,107 @@ function pre_r($array){
 	<br />
 
 
+<div class=" col-md-3 col-sm-6 text-center" id="item">
+	<div class="modal fade" id="myModal" role="dialog">
+		<div class="modal-dialog modal-lg">
+	    
+		<div class="modal-content">
+			<div class="modal-header">
 
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
 
-<?php include "cart.php" ?>
+		<!--CONTENT OF THE CART-->
+
+<div class="modal-body">
+	<div class="row">
+			<?php //if(isset($_SESSION['active'])): ?>
+			<div class="table-responsive col-lg-12 ">  
+				<table class="table text-left" id="cart">  
+					<tr><th colspan="5"><h3>Order Details</h3></th></tr>   
+				<tr > 
+					
+						<th width="40%">Product Name</th>  
+						<th width="10%">Quantity</th>
+						<th width="20%">Price</th>
+						<th width="15%">Total</th>
+						<th width="5%">Action</th>  
+				</tr>  
+		        
+				<?php   
+					if(!empty($_SESSION['shopping_cart'])):
+		             $total = 0;
+						foreach($_SESSION['shopping_cart'] as $key => $product): 
+		        ?>  
+				<tr>  
+					<td><?php echo $product['name']; ?></td>  
+					<td><?php echo $product['quantity']; ?></td>  
+					<td>&#8369; <?php echo $product['price']; ?></td>  
+					<td>&#8369; <?php echo number_format($product['quantity'] * $product['price'], 2); ?></td>  
+					<td>
+						<a href="index.php?action=delete&item_id=<?php echo $product['id']; ?>">
+							<i class="fa fa-trash"></i>
+						</a>
+					</td>  
+				</tr>
+				<?php  
+					$total = $total + ($product['quantity'] * $product['price']);
+					endforeach;
+					//$$_SESSION['total'] = $total;  
+				?>  
+				<tr>  
+					<td colspan="3" align="right">Total</td>  
+					<td align="right">&#8369; <?php echo number_format($total, 2); ?></td>  
+					<td></td>  
+		        </tr>
+
+		        <tr>
+		            <!-- Show checkout button only if the shopping cart is not empty -->
+		            <td colspan="3">
+						<?php 
+							if (isset($_SESSION['shopping_cart'])):
+								if (count($_SESSION['shopping_cart']) > 0):
+							?>
+								<a href="clear_cart.php" class="button"><i class="fa fa-times" aria-hidden="true"></i>CLEAR CART</a>
+								
+							<?php 	
+								endif;
+							endif;
+						?>
+					</td>
+					<td colspan="2">
+						<?php 
+							if (isset($_SESSION['shopping_cart'])):
+								if (count($_SESSION['shopping_cart']) > 0):
+							?>
+								<!--<a href="checkout.php" class="button">Checkout</a>-->
+
+								<form method="POST" action="cart.php">
+									<input type="submit" name="checkout" value="Checkout">
+								</form>
+							<?php 	
+								endif;
+							endif;
+						?>
+					</td>
+				</tr>
+			<?php  	//endif;
+					endif;
+				?>  
+			</table> 
+		</div>
+	</div>				
+</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	      
+		</div>
+	</div>
+  
+</div>
+
 
 <?php include "extensions/footer.php" ?>

@@ -44,8 +44,8 @@ endif;
 
 ?>
 
-<div class="col-md-4"></div>
-	<div class="col-md-4 sign-in">
+
+	<div class="col-md-4 col-xs-10  col-md-offset-4 col-xs-offset-1 sign-in">
 		
 		<form method="POST" action="login.php" class="form-group">
 			<h1 class="text-center">SIGN IN</h1>
@@ -57,6 +57,6 @@ endif;
 			<p class="text-center" style="color:red;"><?php echo $message; ?></p>
 		</form>
 	</div>
-<div class="col-md-4"></div>
+
 
 <?php include "extensions/footer.php" ?>

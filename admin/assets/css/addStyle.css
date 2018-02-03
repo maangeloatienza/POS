@@ -1,0 +1,78 @@
+
+
+body {
+	margin: 0;
+	padding: 0;
+	background: url(../../images/405.jpg) no-repeat center center fixed; 
+  	-webkit-background-size: cover;
+  	-moz-background-size: cover;
+  	-o-background-size: cover;
+  	background-size: cover;
+
+}
+
+.login-form {
+	padding: 20px;
+	background: white;
+	width: 400px;
+	margin: 100px auto;
+	border-radius: 5px;
+	box-shadow: 2px 3px 2px 1px gray;
+}
+
+.login-form input[type="submit"]{
+	width:150px;
+}
+
+.login-form span {
+	background: lightgray;
+}
+
+.prod_tbl th{
+	text-align: center;
+}
+
+.sidebar {
+	background: lightgray;
+	color: blue;
+	height: 400px;
+	padding: 0;
+	border-radius: 5px;
+}
+.sidebar ul li{
+	border-radius: 5px;
+	list-style: none;
+	display: block;
+	text-decoration: none;
+	border:1px solid white;
+	margin: 0;
+	padding-top:5px ;
+}
+
+.sidebar ul li ul li{
+	position: absolute;
+	right: -999em;
+}
+.sidebar ul{
+	display: block;
+	padding: 0;
+	margin: 0;
+
+}
+
+.sidebar ul li:hover ul li{
+	right: auto;
+	margin: auto;
+	text-align: center;
+	position: relative;
+	transition: 3s;
+}
+
+/*ADMIN PAGE*/
+.main-content {
+	margin-top: 100px;
+	padding: 5px;
+	background:rgb(250,250,250);
+	border-radius: 5px;
+	box-shadow: 2px 3px 2px 1px gray;
+}
